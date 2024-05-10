@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const { login, signup } = require("./index");
 const { Message, User } = require("../../models");
 
-
 const mockRequest = (body) => ({
 	body,
 });
@@ -74,66 +73,66 @@ describe("login function", () => {
 	});
 });
 
-describe('signup function', () => {
+describe("signup function", () => {
 	afterEach(() => {
-	  jest.clearAllMocks();
+		jest.clearAllMocks();
 	});
-  
-	it('should create a new user and return status 201 on successful signup', async () => {
-	  const req = mockRequest({ email: 'test@example.com', password: 'password123' });
-	  const res = mockResponse();
-	  const mockUser = { id: 1, email: 'test@example.com', password: 'hashedPassword' };
-	  User.findOne.mockResolvedValue(null);
-	  bcrypt.hash.mockResolvedValue('hashedPassword');
-	  User.create.mockResolvedValue(mockUser);
-  
-	  await signup(req, res);
-  
-	  expect(User.findOne).toHaveBeenCalledWith({ where: { email: 'test@example.com' } });
-	  expect(bcrypt.hash).toHaveBeenCalledWith('password123', 10);
-	  expect(User.create).toHaveBeenCalledWith({ email: 'test@example.com', password: 'hashedPassword' });
-	  expect(res.status).toHaveBeenCalledWith(201);
-	  expect(res.json).toHaveBeenCalledWith({ user: mockUser });
+
+	it("should create a new user and return status 201 on successful signup", async () => {
+		const req = mockRequest({ email: "test@example.com", password: "password123" });
+		const res = mockResponse();
+		const mockUser = { id: 1, email: "test@example.com", password: "hashedPassword" };
+		User.findOne.mockResolvedValue(null);
+		bcrypt.hash.mockResolvedValue("hashedPassword");
+		User.create.mockResolvedValue(mockUser);
+
+		await signup(req, res);
+
+		expect(User.findOne).toHaveBeenCalledWith({ where: { email: "test@example.com" } });
+		expect(bcrypt.hash).toHaveBeenCalledWith("password123", 10);
+		expect(User.create).toHaveBeenCalledWith({ email: "test@example.com", password: "hashedPassword" });
+		expect(res.status).toHaveBeenCalledWith(201);
+		expect(res.json).toHaveBeenCalledWith({ user: mockUser });
 	});
-  
-	it('should return an error message when email already exists', async () => {
-	  const req = mockRequest({ email: 'existing@example.com', password: 'password123' });
-	  const res = mockResponse();
-	  const existingUser = { id: 1, email: 'existing@example.com', password: 'hashedPassword' };
-	  User.findOne.mockResolvedValue(existingUser);
-  
-	  await signup(req, res);
-  
-	  expect(res.status).toHaveBeenCalledWith(400);
+
+	it("should return an error message when email already exists", async () => {
+		const req = mockRequest({ email: "existing@example.com", password: "password123" });
+		const res = mockResponse();
+		const existingUser = { id: 1, email: "existing@example.com", password: "hashedPassword" };
+		User.findOne.mockResolvedValue(existingUser);
+
+		await signup(req, res);
+
+		expect(res.status).toHaveBeenCalledWith(400);
 	});
-  
-	it('should return an error message when User.findOne throws an error', async () => {
-	  const req = mockRequest({ email: 'test@example.com', password: 'password123' });
-	  const res = mockResponse();
-	  User.findOne.mockRejectedValue(new Error('Database error'));
-  
-	  await signup(req, res);
-  
-	  expect(res.status).toHaveBeenCalledWith(500);
+
+	it("should return an error message when User.findOne throws an error", async () => {
+		const req = mockRequest({ email: "test@example.com", password: "password123" });
+		const res = mockResponse();
+		User.findOne.mockRejectedValue(new Error("Database error"));
+
+		await signup(req, res);
+
+		expect(res.status).toHaveBeenCalledWith(500);
 	});
-  
-	it('should return an error message when bcrypt.hash throws an error', async () => {
-	  const req = mockRequest({ email: 'test@example.com', password: 'password123' });
-	  const res = mockResponse();
-	  User.findOne.mockResolvedValue(null);
-	  bcrypt.hash.mockRejectedValue(new Error('Hashing error'));
-  
-	  await signup(req, res);
-  
-	  expect(res.status).toHaveBeenCalledWith(500);
+
+	it("should return an error message when bcrypt.hash throws an error", async () => {
+		const req = mockRequest({ email: "test@example.com", password: "password123" });
+		const res = mockResponse();
+		User.findOne.mockResolvedValue(null);
+		bcrypt.hash.mockRejectedValue(new Error("Hashing error"));
+
+		await signup(req, res);
+
+		expect(res.status).toHaveBeenCalledWith(500);
 	});
-  
-	it('should return an error message when required fields are missing', async () => {
-	  const req = mockRequest({ password: 'password123' });
-	  const res = mockResponse();
-  
-	  await signup(req, res);
-  
-	  expect(res.status).toHaveBeenCalledWith(400);
+
+	it("should return an error message when required fields are missing", async () => {
+		const req = mockRequest({ password: "password123" });
+		const res = mockResponse();
+
+		await signup(req, res);
+
+		expect(res.status).toHaveBeenCalledWith(400);
 	});
-  });
+});

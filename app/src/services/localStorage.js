@@ -4,7 +4,7 @@
  * @param {any} value - The value to be set.
  */
 exports.setValuetoLocalStorage = (key, value) => {
-    localStorage.setItem(key, value);
+	localStorage.setItem(key, value);
 };
 
 /**
@@ -13,7 +13,7 @@ exports.setValuetoLocalStorage = (key, value) => {
  * @returns {any} The retrieved value.
  */
 exports.getValueFromLocalStorage = (key) => {
-    return localStorage.getItem(key);
+	return localStorage.getItem(key);
 };
 
 /**
@@ -21,5 +21,5 @@ exports.getValueFromLocalStorage = (key) => {
  * @param {string} key - The key to remove the value for.
  */
 exports.removeValueFromLocalStorage = (key) => {
-    localStorage.removeItem(key);
+	localStorage.removeItem(key);
 };

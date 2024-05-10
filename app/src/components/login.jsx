@@ -37,15 +37,14 @@ const Login = () => {
 			loginSchema.parse(formData);
 
 			login(formData)
-				.then(({token, error}) => {
-					if(error) {
+				.then(({ token, error }) => {
+					if (error) {
 						setError(error);
 						return;
 					}
 
 					navigate("/");
 					setValuetoLocalStorage(LOCAL_STORAGE_JWT_KEY, token);
-					
 				})
 				.catch((error) => {
 					setError("An error occured while logging in.");

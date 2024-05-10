@@ -11,10 +11,10 @@ const Signup = () => {
 	const [error, setError] = useState("");
 	const [errors, setErrors] = useState({});
 	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-		confirmPassword: ''
-	  });
+		email: "",
+		password: "",
+		confirmPassword: "",
+	});
 
 	// Delete the token from the local storage when the user logs out
 	logout();
@@ -35,9 +35,8 @@ const Signup = () => {
 		try {
 			signupSchema.parse(formData);
 
-
 			signup(formData)
-				.then(({error}) => {
+				.then(({ error }) => {
 					if (error) {
 						setError(error);
 						return;

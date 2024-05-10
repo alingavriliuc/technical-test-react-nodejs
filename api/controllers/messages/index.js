@@ -18,7 +18,7 @@ exports.getMessages = async (req, res) => {
 		// Using the association method to get the user's messages
 		const messages = await user.getMessages();
 
-		res.json(messages);
+		res.status(200).json({ messages });
 	} catch (error) {
 		console.error("Error while trying to get user messages:", error);
 		res.status(500).json({ error: "Error while trying to get user messages." });
@@ -47,7 +47,7 @@ exports.createMessage = async (req, res) => {
 
 		const message = await Message.create({ content, userId });
 
-		res.json(message);
+		res.status(201).json({ message });
 	} catch (error) {
 		console.error("Error while trying to create a message :", error);
 		res.status(500).json({ error: "Error while trying to create a message." });

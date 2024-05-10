@@ -2,7 +2,7 @@
 	"development": {
 		"username": "corma",
 		"password": "root",
-		"database": "corma",
+		"database": "corma_dev",
 		"host": "127.0.0.1",
 		"dialect": "postgres"
 	},
@@ -16,7 +16,7 @@
 	  "production": {
 		"username": "corma",
 		"password": "root",
-		"database": "corma_production",
+		"database": "corma_prod",
 		"host": "127.0.0.1",
 		"dialect": "postgres"
 	  }

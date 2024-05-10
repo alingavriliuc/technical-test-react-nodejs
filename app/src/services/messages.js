@@ -8,18 +8,17 @@ const { LOCAL_STORAGE_JWT_KEY, API_URL } = require("../constants");
  */
 exports.getMessages = async () => {
 	try {
-        const token = getValueFromLocalStorage(LOCAL_STORAGE_JWT_KEY);
+		const token = getValueFromLocalStorage(LOCAL_STORAGE_JWT_KEY);
 
 		const response = await fetch(`${API_URL}/messages`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-                Authorization: token,
+				Authorization: token,
 			},
 		});
 
 		const jsonData = await response.json();
-
 		return { data: jsonData, status: response.status };
 	} catch (error) {
 		throw new Error("Error while logging in");
