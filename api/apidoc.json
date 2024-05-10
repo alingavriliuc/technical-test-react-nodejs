@@ -1,0 +1,20 @@
+{
+    "name": "Corma API Doc",
+    "version": "1.0.0",
+    "description": "",
+    "title": "Corma API Doc",
+    "url": "http://localhost:3000",
+    "header": {
+      "title": "Corma API Doc",
+      "content": ""
+    },
+    "footer": {
+      "title": "Corma API Doc",
+      "content": ""
+    },
+    "template": {
+      "withCompare": false,
+      "withGenerator": false
+    },
+    "sampleUrl": false
+  }

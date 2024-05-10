@@ -1,6 +1,42 @@
 const { Message, User } = require("../../models");
 const { messageSchema } = require("../../schema");
 
+/**
+ * @api {get} /messages Get User Messages
+ * @apiName GetMessages
+ * @apiGroup Messages
+ *
+ * @apiHeader {String} Authorization User's JWT token.
+ *
+ * @apiSuccess {Array} messages Array of user's messages.
+ * @apiSuccess {String} messages.id Message ID.
+ * @apiSuccess {String} messages.content Message content.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "messages": [
+ *           {
+ *               "id": "1",
+ *               "content": "Hello, world!"
+ *           },
+ *           {
+ *               "id": "2",
+ *               "content": "How are you?"
+ *           }
+ *       ]
+ *     }
+ *
+ * @apiError (401 Unauthorized) UserNotAuthenticated User not authenticated.
+ * @apiError (404 Not Found) UserNotFound User not found.
+ * @apiError (500 Internal Server Error) ServerError Error while trying to get user messages.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 401 Unauthorized
+ *     {
+ *       "error": "User not authenticated."
+ *     }
+ */
 exports.getMessages = async (req, res) => {
 	try {
 		const userId = req?.user?.userId;
@@ -25,6 +61,40 @@ exports.getMessages = async (req, res) => {
 	}
 };
 
+/**
+ * @api {post} /messages Create Message
+ * @apiName CreateMessage
+ * @apiGroup Messages
+ *
+ * @apiHeader {String} Authorization User's JWT token.
+ *
+ * @apiParam {String} content Message content.
+ *
+ * @apiSuccess {Object} message Newly created message object.
+ * @apiSuccess {String} message.id Message ID.
+ * @apiSuccess {String} message.content Message content.
+ * @apiSuccess {String} message.userId ID of the user who created the message.
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 201 Created
+ *     {
+ *       "message": {
+ *           "id": "1",
+ *           "content": "Hello, world!",
+ *           "userId": "1234567890"
+ *       }
+ *     }
+ *
+ * @apiError (400 Bad Request) MissingContent Message content is required.
+ * @apiError (401 Unauthorized) UserNotAuthenticated User not authenticated.
+ * @apiError (500 Internal Server Error) ServerError Error while trying to create a message.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "Message content is required."
+ *     }
+ */
 exports.createMessage = async (req, res) => {
 	try {
 		const userId = req?.user?.userId;
