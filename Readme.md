@@ -30,6 +30,14 @@ Passwords and logins are for example, you can use them or add your own. Also do 
 
 `npm run start`
 
+To create a message you can create one manually or using API endpoint `localhost:3001/create-message`
+You have to pass JWT token in headers, and the body format is
+```JSON
+{
+    "content": "azeazeazeae"
+}
+```
+
 ## Setup React APP
 
 `cd app`
