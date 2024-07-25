@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { login, signup } = require("./index");
-const { Message, User } = require("../../models");
+const { User } = require("../../models");
 
 const mockRequest = (body) => ({
 	body,
